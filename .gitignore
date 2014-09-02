@@ -1,8 +1,0 @@
-Ignorar arquivos específicos
-.DS_Store
-*.zip
-*~
-*.swp
-
-# Ignorar todos os diretórios e arquivos em um diretório.
-tmp/**/* 
