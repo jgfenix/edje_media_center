@@ -12,6 +12,9 @@ collections {
        image: "video_icon.png" LOSSY 80;
        image: "photo_icon.png" LOSSY 80;
        image: "config_icon.png" LOSSY 80;
+       image: "confirm_exit_window.png" RAW;
+       image: "yes_bt.jpg" LOSSY 90;
+       image: "no_bt.jpg" LOSSY 90;
        image: "exit_icon.png" LOSSY 80;
     }
 
@@ -231,6 +234,80 @@ collections {
          }
 
          part {
+            name: "confirm_exit_window";
+            type: IMAGE;
+            mouse_events: 0;
+            description {
+               state: "default" 0.0;
+               visible: 0;
+               image.normal: "confirm_exit_window.png";
+               rel1 {
+                  relative: 0.1 0.1 ; to: "background_img";
+                  offset: 0 15;
+               }
+               rel2 {
+                  relative: 0.9 0.8; to: "background_img";
+                  offset: 0 -20;
+                  }
+            }
+            description {
+               state: "visible" 0.0;
+               inherit: "default" 0.0;
+               visible: 1;
+            }
+         }
+
+         part { // yes_bt is part of the confirm_exit_window
+            name: "yes_bt";
+            type: IMAGE;
+            mouse_events: 1;
+            description {
+               state: "default" 0.0;
+               visible: 0;
+               image.normal: "yes_bt.jpg";
+               //color: 200 0 0 255;
+               rel1 {
+                  relative: 0.2 0.6; to: "confirm_exit_window";
+                  //offset: 0 -20;
+               }
+               rel2 {
+                  relative: 0.4 0.8; to: "confirm_exit_window";
+                  //offset 0 -20;
+               }
+            }
+            description {
+               state: "visible" 0.0;
+               inherit: "default" 0.0;
+               visible: 1;
+            }
+
+         }
+
+         part { // no_bt is part of the confirm_exit_window
+            name: "no_bt";
+            type: IMAGE;
+            mouse_events: 1;
+            description {
+               state: "default" 0.0;
+               visible: 0;
+               image.normal: "no_bt.jpg";
+               //color: 0 200 0 255;
+               rel1 {
+                  relative: 0.6 0.6; to: "confirm_exit_window";
+                  //offset: 0 -20;
+               }
+               rel2 {
+                  relative: 0.8 0.8; to: "confirm_exit_window";
+                  //offset 0 -20;
+               }
+            }
+            description {
+               state: "visible" 0.0;
+               inherit: "default" 0.0;
+               visible: 1;
+            }
+         }
+         part {
             name: "exit_bt";
             type: IMAGE;
             mouse_events: 1;
@@ -259,7 +336,6 @@ collections {
                inherit: "default" 0.0;
                
             }
-
          }
      } /*end parts */
 
@@ -408,14 +484,37 @@ collections {
            transition: LINEAR 0.1;
         }
         
-        program { 
+        program { // this program active the visibility of confirm exit window
            name: "exit_bt_clicked";
            signal: "mouse,clicked,1";
            source: "exit_bt";
-           action: SIGNAL_EMIT "exit_bt,clicked" "exit_bt";
+           action: STATE_SET "visible" 0.0;
+           target: "confirm_exit_window";
+           target: "yes_bt";
+           target: "no_bt";
+           transition: LINEAR 0.1;
+        }
+
+        program { // this program just works if the confirm exit window is visible
+           name: "yes_bt_clicked";
+           signal: "mouse,clicked,1";
+           source: "yes_bt";
+           action: SIGNAL_EMIT "yes_bt,clicked" "yes_bt";
            //target: "exit_bt";
            //transition: LINEAR 0.1;
         }
+        
+        program { // this program just works if the confirm exit window is visible
+           name: "no_bt_clicked";
+           signal: "mouse,clicked,1";
+           source: "no_bt";
+           action: STATE_SET "default" 0.0;
+           target: "confirm_exit_window";
+           target: "yes_bt";
+           target: "no_bt";
+           transition: LINEAR 0.1;
+        }
+        
      } /* end programs */
  } /*end group "my_group" */
 } /* end collections */

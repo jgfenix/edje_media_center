@@ -1,3 +1,8 @@
+/* 
+ * just type make and then run with ./edje_player 
+ *
+  */
+
 #include <Elementary.h>
 
 #ifndef PACKAGE_DATA_DIR
@@ -9,11 +14,10 @@
 
 static const char commands[] = \
   "commands are:\n"
-  "\tEsc - exit\n"
+  "\tEsc \n"
   "\tleft \n"
   "\tright \n\n";
 
-//static int changed = 0;
 
 static void
 _on_mouse_over(void        *data EINA_UNUSED,
@@ -23,7 +27,7 @@ _on_mouse_over(void        *data EINA_UNUSED,
 {
    fprintf(stdout, "Signal '%s' coming from part '%s'\n\n", emission, source);
 
-   if (!strcmp(emission, "exit_bt,clicked")) 
+   if (!strcmp(emission, "yes_bt,clicked")) 
         ecore_main_loop_quit();
 }
 
@@ -41,22 +45,40 @@ _on_keydown(void        *data,
 
    if (!strcmp(ev->key, "Escape")) 
      {
+        printf("%s pressed\n", ev->key);
         ecore_main_loop_quit();
      }
    else if (!strcmp(ev->key, "Right")) 
      {
-        printf("%s pressed\n", ev->key);
-        printf("signal: right_down\n\n");
+        printf("%s pressed\nsignal: right_down\n\n", ev->key);
         edje_object_signal_emit(edje_obj, "right_down", "");
         return;
     }
    else if (!strcmp(ev->key, "Left")) 
      {
-        printf("%s pressed\n", ev->key);
-        printf("signal: left_down\n\n");
+        printf("%s pressed\nsignal: left_down\n\n", ev->key);
         edje_object_signal_emit(edje_obj, "left_down", "");
         return;
    }
+   else if (!strcmp(ev->key, "Up")) 
+     {
+        printf("%s pressed\nsignal: up_down\n\n", ev->key);
+        //edje_object_signal_emit(edje_obj, "up_down", ""); TODO
+        return;
+   }
+   else if (!strcmp(ev->key, "Down")) 
+     {
+        printf("%s pressed\nsignal: down_down\n\n", ev->key);
+        //edje_object_signal_emit(edje_obj, "down_down", ""); TODO
+        return;
+   }
+   else if (!strcmp(ev->key, "Return")) 
+     {
+        printf("%s pressed\nsignal: return_down\n\n", ev->key);
+        //edje_object_signal_emit(edje_obj, "Enter_down", ""); TODO
+        return;
+   }
+
 }
 
 static Evas_Object *create_my_group(Evas *canvas, const char *text)
@@ -81,13 +103,13 @@ static Evas_Object *create_my_group(Evas *canvas, const char *text)
        return NULL;
     }
 
-   if (text)
+   /*if (text)
      // 'text' is the name of a part in the edc file
         if (!edje_object_part_text_set(edje, "text", text))
           {
              EINA_LOG_WARN("could not set the text. "
                            "Maybe part 'text' does not exist");
-          }
+          }*/
 
    evas_object_move(edje, 0, 0);
    evas_object_resize(edje, WIDTH, HEIGHT);
@@ -97,8 +119,6 @@ static Evas_Object *create_my_group(Evas *canvas, const char *text)
 
 int main(int argc, char *argv[])
 { 
-//printf("\nARGC = %d\n",argc);
-//printf("\nARGV[1] = %s\n",argv[1]);
    Ecore_Evas *window;
    Evas *canvas;
    Evas_Object *edje;
@@ -126,7 +146,7 @@ int main(int argc, char *argv[])
 
    evas_object_event_callback_add(edje, EVAS_CALLBACK_KEY_DOWN, _on_keydown, edje);
    
-   edje_object_signal_callback_add(edje, "exit_bt,clicked", "exit_bt",
+   edje_object_signal_callback_add(edje, "yes_bt,clicked", "yes_bt",
                                    _on_mouse_over, NULL);
    
    ecore_evas_show(window);
