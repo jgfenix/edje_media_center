@@ -94,15 +94,25 @@ collections {
                   offset: 0 -20;
                   }
             }
-            description { //keyboard left_down
+            description { // keyboard left_down
                state: "left_down" 0.0;
                inherit: "default" 0.0;
                image.normal: "music_icon.png";
             }
-            description { //keyboard right_down
+            description { // keyboard right_down
                state: "right_down" 0.0;
                inherit: "default" 0.0;
                image.normal: "video_icon.png";
+            }
+            description { // keyboard up_down
+               state: "up_down" 0.0;
+               inherit: "default" 0.0;
+               image.normal: "photo_icon.png";
+            }
+            description { // keyboard down_down
+               state: "down_down" 0.0;
+               inherit: "default" 0.0;
+               image.normal: "config_icon.png";
             }
             description {
                state: "music_bt_clicked" 0.0;
@@ -340,8 +350,9 @@ collections {
      } /*end parts */
 
 ////////////// programs /////////////////
+
      programs {
-        program {
+        program { // 
            name: "_left_down";
            signal: "left_down";
            source: "";
@@ -349,11 +360,30 @@ collections {
            target: "app_window";
            transition: LINEAR 0.1;
         }
+
         program {
            name: "_right_down";
            signal: "right_down";
            source: "";
            action: STATE_SET "right_down" 0.0;
+           target: "app_window";
+           transition: LINEAR 0.1;
+        }
+        
+        program {
+           name: "_up_down";
+           signal: "up_down";
+           source: "";
+           action: STATE_SET "up_down" 0.0;
+           target: "app_window";
+           transition: LINEAR 0.1;
+        }
+
+        program {
+           name: "_down_down";
+           signal: "down_down";
+           source: "";
+           action: STATE_SET "down_down" 0.0;
            target: "app_window";
            transition: LINEAR 0.1;
         }
@@ -503,7 +533,19 @@ collections {
            //target: "exit_bt";
            //transition: LINEAR 0.1;
         }
-        
+ 
+        program { // this program active the visibility of 
+                  //confirm window exit if Escape(Esc) is pressed
+           name: "escape_down";
+           signal: "escape";
+           source: "";
+           action: STATE_SET "visible" 0.0;
+           target: "confirm_exit_window";
+           target: "yes_bt";
+           target: "no_bt";
+           transition: LINEAR 0.1;
+        }       
+
         program { // this program just works if the confirm exit window is visible
            name: "no_bt_clicked";
            signal: "mouse,clicked,1";

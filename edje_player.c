@@ -46,7 +46,8 @@ _on_keydown(void        *data,
    if (!strcmp(ev->key, "Escape")) 
      {
         printf("%s pressed\n", ev->key);
-        ecore_main_loop_quit();
+        edje_object_signal_emit(edje_obj,"escape", ""); 
+        //ecore_main_loop_quit();
      }
    else if (!strcmp(ev->key, "Right")) 
      {
@@ -63,13 +64,13 @@ _on_keydown(void        *data,
    else if (!strcmp(ev->key, "Up")) 
      {
         printf("%s pressed\nsignal: up_down\n\n", ev->key);
-        //edje_object_signal_emit(edje_obj, "up_down", ""); TODO
+        edje_object_signal_emit(edje_obj, "up_down", ""); 
         return;
    }
    else if (!strcmp(ev->key, "Down")) 
      {
         printf("%s pressed\nsignal: down_down\n\n", ev->key);
-        //edje_object_signal_emit(edje_obj, "down_down", ""); TODO
+        edje_object_signal_emit(edje_obj, "down_down", "");
         return;
    }
    else if (!strcmp(ev->key, "Return")) 
