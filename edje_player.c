@@ -3,7 +3,11 @@
  *
   */
 
-#include <Elementary.h>
+#include <Eina.h>
+#include <Evas.h>
+#include <Ecore.h>
+#include <Ecore_Evas.h>
+#include <Edje.h>
 
 #ifndef PACKAGE_DATA_DIR
 #define PACKAGE_DATA_DIR "."
@@ -76,7 +80,7 @@ _on_keydown(void        *data,
    else if (!strcmp(ev->key, "Return")) 
      {
         printf("%s pressed\nsignal: return_down\n\n", ev->key);
-        //edje_object_signal_emit(edje_obj, "Enter_down", ""); TODO
+        //edje_object_signal_emit(edje_obj, "Enter_down", ""); //TODO
         return;
    }
 
