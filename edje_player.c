@@ -1,7 +1,7 @@
 /* 
  * just type make and then run with ./edje_player 
  *
-  */
+ */
 
 #include <Eina.h>
 #include <Evas.h>
@@ -86,7 +86,7 @@ _on_keydown(void        *data,
 
 }
 
-static Evas_Object *create_my_group(Evas *canvas, const char *text)
+static Evas_Object *create_my_group(Evas *canvas)//, const char *text)
 {
    Evas_Object *edje;
    edje = edje_object_add(canvas);
@@ -95,10 +95,10 @@ static Evas_Object *create_my_group(Evas *canvas, const char *text)
      {
         EINA_LOG_CRIT("could not create edje object!");
         return NULL;
-     }
+    }
 
     if (!edje_object_file_set(edje, edje_file , "my_group"))
-      {
+     {
        int err = edje_object_load_error_get(edje);
        const char *errmsg = edje_load_error_str(err);
        fprintf(stderr, "could not load 'group_name' from theme.edj: %s",
@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
    Ecore_Evas *window;
    Evas *canvas;
    Evas_Object *edje;
-   const char *text;
+   //const char *text;
    
    ecore_evas_init();
    edje_init();
@@ -137,16 +137,18 @@ int main(int argc, char *argv[])
      {
         EINA_LOG_CRIT("could not create window.");
         return -1;
-     }
+   }
    canvas = ecore_evas_get(window);
 
-   text = (argc > 1) ? argv[1] : NULL;
+   //text = (argc > 1) ? argv[1] : NULL;
 
-   edje = create_my_group(canvas, text);
+   edje = create_my_group(canvas);//, text);
+   
    if (!edje)
      return -2;
      
    fprintf(stdout, commands);
+
    evas_object_focus_set(edje, EINA_TRUE);
 
    evas_object_event_callback_add(edje, EVAS_CALLBACK_KEY_DOWN, _on_keydown, edje);
