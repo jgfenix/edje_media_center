@@ -33,7 +33,7 @@ _on_mouse_over(void        *data EINA_UNUSED,
 
    if (!strcmp(emission, "yes_bt,clicked")) 
         ecore_main_loop_quit();
-}
+ }
 
 static void
 _on_keydown(void        *data,
@@ -152,6 +152,41 @@ int main(int argc, char *argv[])
    evas_object_focus_set(edje, EINA_TRUE);
 
    evas_object_event_callback_add(edje, EVAS_CALLBACK_KEY_DOWN, _on_keydown, edje);
+
+
+   edje_object_signal_callback_add(edje, "main.show.music", "music_bt",
+                                   _on_mouse_over, NULL);
+
+   edje_object_signal_callback_add(edje, "main.selected.music", "music_bt",
+                                   _on_mouse_over, NULL);
+
+
+   edje_object_signal_callback_add(edje, "main.show.video", "video_bt",
+                                   _on_mouse_over, NULL);
+
+   edje_object_signal_callback_add(edje, "main.selected.video", "video_bt",
+                                   _on_mouse_over, NULL);
+
+
+   edje_object_signal_callback_add(edje, "main.show.photo", "photo_bt",
+                                   _on_mouse_over, NULL);
+
+   edje_object_signal_callback_add(edje, "main.selected.photo", "photo_bt",
+                                   _on_mouse_over, NULL);
+
+   
+   edje_object_signal_callback_add(edje, "main.show.config", "config_bt",
+                                   _on_mouse_over, NULL);
+
+   edje_object_signal_callback_add(edje, "main.selected.config", "config_bt",
+                                   _on_mouse_over, NULL);
+
+
+   edje_object_signal_callback_add(edje, "main.show.exit", "exit_bt",
+                                   _on_mouse_over, NULL);
+
+   edje_object_signal_callback_add(edje, "main.selected.exit", "exit_bt",
+                                   _on_mouse_over, NULL);
    
    edje_object_signal_callback_add(edje, "yes_bt,clicked", "yes_bt",
                                    _on_mouse_over, NULL);
