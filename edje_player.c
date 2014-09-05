@@ -19,8 +19,10 @@
 static const char commands[] = \
   "commands are:\n"
   "\tEsc \n"
-  "\tleft \n"
-  "\tright \n\n";
+  "\tLeft \n"
+  "\tRight \n"
+  "\tEnter \n"
+  "\tMouse (in / click)\n\n";
 
 
 static void
@@ -97,14 +99,6 @@ static Evas_Object *create_my_group(Evas *canvas)
        evas_object_del(edje);
        return NULL;
     }
-
-   /*if (text)
-     // 'text' is the name of a part in the edc file
-        if (!edje_object_part_text_set(edje, "text", text))
-          {
-             EINA_LOG_WARN("could not set the text. "
-                           "Maybe part 'text' does not exist");
-          }*/
 
    evas_object_move(edje, 0, 0);
    evas_object_resize(edje, WIDTH, HEIGHT);
