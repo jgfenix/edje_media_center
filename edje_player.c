@@ -33,7 +33,7 @@ _on_mouse_over(void        *data EINA_UNUSED,
 
    if (!strcmp(emission, "yes_bt,clicked")) 
         ecore_main_loop_quit();
-}
+ }
 
 static void
 _on_keydown(void        *data,
@@ -55,34 +55,24 @@ _on_keydown(void        *data,
      }
    else if (!strcmp(ev->key, "Right")) 
      {
-        printf("%s pressed\nsignal: right_down\n\n", ev->key);
-        edje_object_signal_emit(edje_obj, "right_down", "");
+        printf("'%s' pressed\nsignal: 'main.show.next'\n\n", ev->key);
+        edje_object_signal_emit(edje_obj, "main.show.next", "");
         return;
     }
    else if (!strcmp(ev->key, "Left")) 
      {
-        printf("%s pressed\nsignal: left_down\n\n", ev->key);
-        edje_object_signal_emit(edje_obj, "left_down", "");
-        return;
-   }
-   else if (!strcmp(ev->key, "Up")) 
-     {
-        printf("%s pressed\nsignal: up_down\n\n", ev->key);
-        edje_object_signal_emit(edje_obj, "up_down", ""); 
-        return;
-   }
-   else if (!strcmp(ev->key, "Down")) 
-     {
-        printf("%s pressed\nsignal: down_down\n\n", ev->key);
-        edje_object_signal_emit(edje_obj, "down_down", "");
+        printf("%s pressed\nsignal: 'main.show.prev'\n\n", ev->key);
+        edje_object_signal_emit(edje_obj, "main.show.prev", "");
         return;
    }
    else if (!strcmp(ev->key, "Return")) 
      {
-        printf("%s pressed\nsignal: return_down\n\n", ev->key);
-        //edje_object_signal_emit(edje_obj, "Enter_down", ""); //TODO
+        printf("%s pressed\nsignal: 'main.show.enter'\n\n", ev->key);
+        edje_object_signal_emit(edje_obj, "main.show.enter", ""); //TODO
         return;
    }
+   else
+   	printf("Signal '%s' not used\n\n",ev->key );
 
 }
 
@@ -152,6 +142,34 @@ int main(int argc, char *argv[])
    evas_object_focus_set(edje, EINA_TRUE);
 
    evas_object_event_callback_add(edje, EVAS_CALLBACK_KEY_DOWN, _on_keydown, edje);
+
+
+   edje_object_signal_callback_add(edje, "main.show.audio", "audio_bt",
+                                   _on_mouse_over, NULL);
+
+   edje_object_signal_callback_add(edje, "main.selected.audio", "audio_bt",
+                                   _on_mouse_over, NULL);
+
+
+   edje_object_signal_callback_add(edje, "main.show.video", "video_bt",
+                                   _on_mouse_over, NULL);
+
+   edje_object_signal_callback_add(edje, "main.selected.video", "video_bt",
+                                   _on_mouse_over, NULL);
+
+
+   edje_object_signal_callback_add(edje, "main.show.configure", "configure_bt",
+                                   _on_mouse_over, NULL);
+
+   edje_object_signal_callback_add(edje, "main.selected.configure", "configure_bt",
+                                   _on_mouse_over, NULL);
+
+
+   edje_object_signal_callback_add(edje, "main.show.exit", "exit_bt",
+                                   _on_mouse_over, NULL);
+
+   edje_object_signal_callback_add(edje, "main.selected.exit", "exit_bt",
+                                   _on_mouse_over, NULL);
    
    edje_object_signal_callback_add(edje, "yes_bt,clicked", "yes_bt",
                                    _on_mouse_over, NULL);
@@ -167,4 +185,3 @@ int main(int argc, char *argv[])
  
    return 0;
 }
-
