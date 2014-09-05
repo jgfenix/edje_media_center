@@ -68,7 +68,7 @@ _on_keydown(void        *data,
    else if (!strcmp(ev->key, "Return")) 
      {
         printf("%s pressed\nsignal: 'main.show.enter'\n\n", ev->key);
-        edje_object_signal_emit(edje_obj, "main.show.enter", ""); //TODO
+        edje_object_signal_emit(edje_obj, "main.show.enter", "");
         return;
    }
    else
@@ -76,7 +76,7 @@ _on_keydown(void        *data,
 
 }
 
-static Evas_Object *create_my_group(Evas *canvas)//, const char *text)
+static Evas_Object *create_my_group(Evas *canvas)
 {
    Evas_Object *edje;
    edje = edje_object_add(canvas);
@@ -117,8 +117,7 @@ int main(int argc, char *argv[])
    Ecore_Evas *window;
    Evas *canvas;
    Evas_Object *edje;
-   //const char *text;
-   
+      
    ecore_evas_init();
    edje_init();
 
@@ -130,9 +129,7 @@ int main(int argc, char *argv[])
    }
    canvas = ecore_evas_get(window);
 
-   //text = (argc > 1) ? argv[1] : NULL;
-
-   edje = create_my_group(canvas);//, text);
+   edje = create_my_group(canvas);
    
    if (!edje)
      return -2;
@@ -177,9 +174,6 @@ int main(int argc, char *argv[])
    ecore_evas_show(window);
    ecore_main_loop_begin();
    
-  // evas_object_del(edje);
-  // ecore_evas_free(window);
-
    edje_shutdown();
    ecore_evas_shutdown();
  
