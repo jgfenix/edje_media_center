@@ -21,7 +21,6 @@ collections {
          part {
             name: "bg_rect"; //gray retangle that fills the entire window
             type: RECT;
-
             description {
                state: "default" 0.0;
                color: 255 255 255 55;
@@ -83,9 +82,7 @@ collections {
             description {
                state: "default" 0.0;
                //color: 55 50 100 200;
-               image.normal: "app_window.jpg";
-
-                                
+               image.normal: "app_window.jpg";                                
                rel1 {
                   relative: 0.1 0.1 ; to: "background_img";
                   offset: 0 15;
@@ -95,56 +92,6 @@ collections {
                   offset: 0 -20;
                }
             }
-            /*description { // audio_bt_mouse_in
-               state: "audio_bt_mouse_in" 0.0;
-               inherit: "default" 0.0;
-               image.normal: "audio_icon.png";
-            }
-            description { // video_bt_mouse_in
-               state: "video_bt_mouse_in" 0.0;
-               inherit: "default" 0.0;
-               image.normal: "video_icon.png";
-            }
-            description { // configure_bt_mouse_in
-               state: "configure_bt_mouse_in" 0.0;
-               inherit: "default" 0.0;
-               image.normal: "configure_icon.png";
-            }
-            description { // exit_bt_mouse_in
-               state: "exit_bt_mouse_in" 0.0;
-               inherit: "default" 0.0;
-               image.normal: "exit_icon.png";
-            }
-            description { // keyboard left_down
-               state: "left_down" 0.0;
-               inherit: "default" 0.0;
-               image.normal: "audio_icon.png";
-            }
-            description { // keyboard right_down
-               state: "right_down" 0.0;
-               inherit: "default" 0.0;
-               image.normal: "video_icon.png";
-            }
-            description { // keyboard down_down
-               state: "down_down" 0.0;
-               inherit: "default" 0.0;
-               image.normal: "configure_icon.png";
-            }
-            description {
-               state: "audio_bt_clicked" 0.0;
-               inherit: "default" 0.0;
-               color: 255 0 0 255;
-            }
-            description {
-               state: "video_bt_clicked" 0.0;
-               inherit: "default" 0.0;
-               color: 0 255 0 255;
-            }
-            description {
-               state: "configure_bt_clicked" 0.0;
-               inherit: "default" 0.0;
-               //color: 0 0 0 255;
-            }*/
          }
 
          part {
@@ -168,11 +115,6 @@ collections {
                   //offset: -15 0;
                 }
             }
-            description {
-               state: "mouse_in" 0.0;
-               inherit: "default" 0.0;
-               color: 200 200 0 255;
-            }
          }
          
          part {
@@ -183,8 +125,6 @@ collections {
                state: "default" 0.0;
                image {
                   normal: "video_icon.png";
-                  //border: 5 5 5 5  ;
-                  //middle: 1;
                }
                color: 0 255 0 255;
                rel1 {
@@ -196,12 +136,7 @@ collections {
                    //offset: -25 0;
                }
          }
-         description {
-               state: "mouse_in" 0.0;
-               inherit: "default" 0.0;
-               color: 200 200 0 255;
-            }
-
+         
          part {
             name: "configure_bt";
             type: IMAGE;
@@ -221,11 +156,6 @@ collections {
                   //offset: -15 0;
                 }
             }
-            /*description {
-               state: "mouse_in" 0.0;
-               inherit: "default" 0.0;
-               color: 200 200 0 255;
-            }*/
          }
 
          part {
@@ -308,8 +238,6 @@ collections {
             mouse_events: 1;
             description {
                state: "default" 0.0;
-               //max: 50 50;
-               //min: 50 50;
                image.normal: "exit_icon.png";
                color: 0 255 0 255;
                rel1 {
@@ -321,58 +249,37 @@ collections {
                   offset: -25 -10;
                }
             }
-            /*description {
-               state: "mouse_in" 0.0;
-               inherit: "default" 0.0;
-               color: 200 0 0 255;
-            }
-            description {
-               state: "clicked" 0.0;
-               inherit: "default" 0.0;
-            }*/
          }
      } /*end parts */
 
 ////////////// programs /////////////////
 
      programs {
-        program { // 
-           name: "_left_down";
-           signal: "left_down";
+
+     /********* _key_down_ *********/
+        program { 
+           name: "main_show_next";
+           signal: "main.show.next";
            source: "";
-           action: STATE_SET "left_down" 0.0;
-           target: "app_window";
-           transition: LINEAR 0.1;
+           
         }
 
-        program {
-           name: "_right_down";
-           signal: "right_down";
+        program { 
+           name: "main_show_prev";
+           signal: "main.show.prev";
            source: "";
-           action: STATE_SET "right_down" 0.0;
-           target: "app_window";
-           transition: LINEAR 0.1;
+           
         }
+
+        program { 
+           name: "main_show_enter";
+           signal: "main.show.enter";
+           source: "";
+           
+
+        }/********* end _keyboard_down_ *********/
+
         
-        program {
-           name: "_up_down";
-           signal: "up_down";
-           source: "";
-           action: STATE_SET "up_down" 0.0;
-           target: "app_window";
-           transition: LINEAR 0.1;
-        }
-
-        program {
-           name: "_down_down";
-           signal: "down_down";
-           source: ""; 
-           action: STATE_SET "down_down" 0.0;
-           target: "app_window"; 
-           transition: LINEAR 0.1;
-        }
-
-
         /******** audio_bt ********/
         program { 
            name: "audio_bt_mouse_in";
@@ -519,8 +426,7 @@ collections {
            signal: "mouse,clicked,*";
            source: "yes_bt";
            action: SIGNAL_EMIT "yes_bt,clicked" "yes_bt";
-           //target: "exit_bt";
-           //transition: LINEAR 0.1;
+           
         }
  
         program { /* this program active the visibility of 
