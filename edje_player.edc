@@ -417,17 +417,10 @@ collections {
            target: "no_bt";
            transition: LINEAR 0.1;
         }
-
-        program { // this program just works if the confirm exit window is visible
-           name: "yes_bt_clicked";
-           signal: "mouse,clicked,*";
-           source: "yes_bt";
-           action: SIGNAL_EMIT "yes_bt,clicked" "yes_bt";
-           
-        }
  
         program { /* this program active the visibility of 
-                  confirm window exit if Escape(Esc) is pressed */
+                   confirm window exit if Escape(Esc) is pressed */
+           
            name: "escape_down";
            signal: "escape";
            source: "";
@@ -436,11 +429,18 @@ collections {
            target: "yes_bt";
            target: "no_bt";
            transition: LINEAR 0.1;
-        }       
+        }
+
+        program { // this program just works if the confirm exit window is visible
+           name: "yes_bt_clicked";
+           signal: "mouse,clicked,*";
+           source: "yes_bt";
+           action: SIGNAL_EMIT "yes_bt,clicked" "yes_bt";
+        }
 
         program { // this program just works if the confirm exit window is visible
            name: "no_bt_clicked";
-           signal: "mouse,clicked,1";
+           signal: "mouse,clicked,*";
            source: "no_bt";
            action: STATE_SET "default" 0.0;
            target: "confirm_exit_window";
