@@ -242,11 +242,11 @@ collections {
                color: 0 255 0 255;
                rel1 {
                   relative: 0.0 0.9 ; to: "background_img";
-                  offset: 10 10;
+                  offset: 5 5;
                }
                rel2 {
                   relative: 0.1 1.0; to: "background_img";
-                  offset: -25 -10;
+                  offset: -12 -5;
                }
             }
          }
@@ -260,22 +260,19 @@ collections {
         program { 
            name: "main_show_next";
            signal: "main.show.next";
-           source: "";
-           
+           source: "";           
         }
 
         program { 
            name: "main_show_prev";
            signal: "main.show.prev";
-           source: "";
-           
+           source: "";           
         }
 
         program { 
            name: "main_show_enter";
            signal: "main.show.enter";
-           source: "";
-           
+           source: "";           
 
         }/********* end _keyboard_down_ *********/
 

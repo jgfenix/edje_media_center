@@ -24,7 +24,6 @@ static const char commands[] = \
   "\tEnter \n"
   "\tMouse (in / click)\n\n";
 
-
 static void
 _on_mouse_over(void        *data EINA_UNUSED,
                Evas_Object *edje_obj,
@@ -73,9 +72,14 @@ _on_keydown(void        *data,
         edje_object_signal_emit(edje_obj, "main.show.enter", "");
         return;
    }
+   else if (!strcmp(ev->key, "y")) 
+     {
+        printf("%s pressed\nsignal: 'y'\n\n", ev->key);
+        edje_object_signal_emit(edje_obj, "y", "");
+        return;
+   }
    else
    	printf("Signal '%s' not used\n\n",ev->key );
-
 }
 
 static Evas_Object *create_my_group(Evas *canvas)
