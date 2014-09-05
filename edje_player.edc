@@ -85,6 +85,8 @@ collections {
                state: "default" 0.0;
                //color: 55 50 100 200;
                image.normal: "app_window.jpg";
+
+                                
                rel1 {
                   relative: 0.1 0.1 ; to: "background_img";
                   offset: 0 15;
@@ -93,6 +95,32 @@ collections {
                   relative: 0.9 0.8; to: "background_img";
                   offset: 0 -20;
                }
+            }
+////////////////////////////////////////////////////////////
+            /*description { // music_bt_mouse_in
+               state: "music_bt_mouse_in" 0.0;
+               inherit: "default" 0.0;
+               image.normal: "music_icon.png";
+            }
+            description { // video_bt_mouse_in
+               state: "video_bt_mouse_in" 0.0;
+               inherit: "default" 0.0;
+               image.normal: "video_icon.png";
+            }
+            description { // photo_bt_mouse_in
+               state: "photo_bt_mouse_in" 0.0;
+               inherit: "default" 0.0;
+               image.normal: "photo_icon.png";
+            }
+            description { // config_bt_mouse_in
+               state: "config_bt_mouse_in" 0.0;
+               inherit: "default" 0.0;
+               image.normal: "config_icon.png";
+            }
+            description { // exit_bt_mouse_in
+               state: "exit_bt_mouse_in" 0.0;
+               inherit: "default" 0.0;
+               image.normal: "exit_icon.png";
             }
             description { // keyboard left_down
                state: "left_down" 0.0;
@@ -133,7 +161,7 @@ collections {
                state: "config_bt_clicked" 0.0;
                inherit: "default" 0.0;
                //color: 0 0 0 255;
-            }
+            }*/
          }
 
          part {
@@ -150,11 +178,11 @@ collections {
                color: 0 255 0 255;
                rel1 {
                   relative: 0.1 0.8 ; to: "background_img";
-                  offset: 15 0;
+                  //offset: 15 0;
                }
                rel2 {
                   relative: 0.3 0.9; to: "background_img";
-                  offset: -15 0;
+                  //offset: -15 0;
                 }
             }
             description {
@@ -178,11 +206,11 @@ collections {
                color: 0 255 0 255;
                rel1 {
                   relative: 0.3 0.8 ; to: "background_img";
-                  offset: 25 0;
+                  //offset: 25 0;
                }
                rel2 {
                   relative: 0.5 0.9; to: "background_img";
-                  offset: -25 0;
+                   //offset: -25 0;
                }
          }
          description {
@@ -203,18 +231,18 @@ collections {
                 color: 0 255 0 255;
                 rel1 {
                   relative: 0.5 0.8 ; to: "background_img";
-                  offset: 15 0;
+                   //offset: 15 0;
                 }
                 rel2 {
                   relative: 0.7 0.9; to: "background_img";
-                  offset: -15 0;
+                  //offset: -15 0;
                 }
             }
-            description {
+            /*description {
                state: "mouse_in" 0.0;
                inherit: "default" 0.0;
                color: 200 200 0 255;
-            }
+            }*/
          }
 
          part {
@@ -229,18 +257,18 @@ collections {
                 color: 0 255 0 255;
                 rel1 {
                   relative: 0.7 0.8 ; to: "background_img";
-                  offset: 15 0;
+                  //offset: 15 0;
                 }
                 rel2 {
                   relative: 0.9 0.9; to: "background_img";
-                  offset: -15 0;
+                  //offset: -15 0;
                 }
             }
-            description {
+            /*description {
                state: "mouse_in" 0.0;
                inherit: "default" 0.0;
                color: 200 200 0 255;
-            }
+            }*/
          }
 
          part {
@@ -290,7 +318,6 @@ collections {
                inherit: "default" 0.0;
                visible: 1;
             }
-
          }
 
          part { // no_bt is part of the confirm_exit_window
@@ -337,7 +364,7 @@ collections {
                   offset: -25 -10;
                }
             }
-            description {
+            /*description {
                state: "mouse_in" 0.0;
                inherit: "default" 0.0;
                color: 200 0 0 255;
@@ -345,7 +372,7 @@ collections {
             description {
                state: "clicked" 0.0;
                inherit: "default" 0.0;
-            }
+            }*/
          }
      } /*end parts */
 
@@ -382,141 +409,180 @@ collections {
         program {
            name: "_down_down";
            signal: "down_down";
-           source: "";
+           source: ""; 
            action: STATE_SET "down_down" 0.0;
-           target: "app_window";
+           target: "app_window"; 
            transition: LINEAR 0.1;
         }
 
-        program { 
-           name: "music_bt_mouse_clicked_in";
-           signal: "mouse,clicked,*";
-           source: "music_bt";
-           action: STATE_SET "music_bt_clicked" 0.0;
-           target: "app_window";
-           transition: LINEAR 0.1;
-        }
 
-        program { 
-           name: "video_bt_mouse_clicked_in";
-           signal: "mouse,clicked,*";
-           source: "video_bt";
-           action: STATE_SET "video_bt_clicked" 0.0;
-           target: "app_window";
-           transition: LINEAR 0.1;
-        }
-
-        program { 
-           name: "photo_bt_mouse_clicked_in";
-           signal: "mouse,clicked,*";
-           source: "photo_bt";
-           action: STATE_SET "photo_bt_clicked" 0.0;
-           target: "app_window";
-           transition: LINEAR 0.1;
-        }
-
-        program { 
-           name: "config_bt_mouse_clicked_in";
-           signal: "mouse,clicked,*";
-           source: "config_bt";
-           action: STATE_SET "config_bt_clicked" 0.0;
-           target: "app_window";
-           transition: LINEAR 0.1;
-        }
-
+        /******** music_bt ********/
         program { 
            name: "music_bt_mouse_in";
            signal: "mouse,in";
            source: "music_bt";
-           action: STATE_SET "mouse_in" 0.0;
-           target: "music_bt";
+           action: SIGNAL_EMIT "main.show.music" "music_bt";
+        }
+
+        program { 
+           name: "main_show_music";
+           signal: "main.show.music";
+           source: "music_bt";
+           action: STATE_SET "music_bt_mouse_in" 0.0;
+           target: "app_window";
            transition: LINEAR 0.1;
         }
 
         program { 
-           name: "music_bt_mouse_out";
-           signal: "mouse,out";
+           name: "music_bt_mouse_clicked";
+           signal: "mouse,clicked,*";
            source: "music_bt";
-           action: STATE_SET "default" 0.0;
-           target: "music_bt";
-           transition: LINEAR 0.1;
+           action: SIGNAL_EMIT "main.selected.music" "music_bt";
         }
 
+        program { 
+           name: "main_selected_music";
+           signal: "main.selected.music";
+           source: "music_bt";
+           action: STATE_SET "music_bt_clicked" 0.0;
+           target: "app_window";
+           transition: LINEAR 0.1;
+
+        }/******** end music_bt ********/
+
+
+        /******** video_bt ********/
         program { 
            name: "video_bt_mouse_in";
            signal: "mouse,in";
            source: "video_bt";
-           action: STATE_SET "mouse_in" 0.0;
-           target: "video_bt";
+           action: SIGNAL_EMIT "main.show.video" "video_bt";
+        }
+
+        program { 
+           name: "main_show_video";
+           signal: "main.show.video"; 
+           source: "music_bt";
+           action: STATE_SET "video_bt_in" 0.0;
+           target: "app_window";
            transition: LINEAR 0.1;
         }
 
         program { 
-           name: "video_bt_mouse_out";
-           signal: "mouse,out";
+           name: "video_bt_mouse_clicked";
+           signal: "mouse,clicked,*";
            source: "video_bt";
-           action: STATE_SET "default" 0.0;
-           target: "video_bt";
-           transition: LINEAR 0.1;
+           action: SIGNAL_EMIT "main.selected.video" "video_bt";
         }
+
+        program { 
+           name: "main_selected_video";
+           signal: "main.selected.video";
+           source: "video_bt";
+           action: STATE_SET "video_bt_clicked" 0.0;
+           target: "app_window";
+           transition: LINEAR 0.1;
+                
+        }/******** end video_bt ********/
+
         
+        /******** photo_bt ********/
         program { 
-           name: "photo_bt_mouse_in";
+           name: "photo_bt_bt_mouse_in";
            signal: "mouse,in";
+           source: "video_bt";
+           action: SIGNAL_EMIT "main.show.photo" "photo_bt";
+        }
+
+        program { 
+           name: "main_show_photo";
+           signal: "main.show.photo";
            source: "photo_bt";
-           action: STATE_SET "mouse_in" 0.0;
-           target: "photo_bt";
+           action: STATE_SET "photo_bt_mouse_in" 0.0;
+           target: "app_window";
            transition: LINEAR 0.1;
         }
 
         program { 
-           name: "photo_bt_mouse_out";
-           signal: "mouse,out";
+           name: "photo_bt_mouse_clicked";
+           signal: "mouse,clicked,*";
            source: "photo_bt";
-           action: STATE_SET "default" 0.0;
-           target: "photo_bt";
-           transition: LINEAR 0.1;
+           action: SIGNAL_EMIT "main.selected.photo" "photo";
         }
 
         program { 
-           name: "config_bt_mouse_in";
+           name: "main_selected_photo";
+           signal: "main.selected.photo";
+           source: "photo_bt";
+           action: STATE_SET "photo_bt_clicked" 0.0;
+           target: "app_window";
+           transition: LINEAR 0.1;
+
+        }/******** end photo_bt ********/
+
+
+        /******** config_bt ********/
+        program { 
+           name: "config_bt_bt_mouse_in";
            signal: "mouse,in";
            source: "config_bt";
-           action: STATE_SET "mouse_in" 0.0;
-           target: "config_bt";
+           action: SIGNAL_EMIT "main.show.config" "config_bt";
+        }
+
+        program { 
+           name: "main_show_config";
+           signal: "main.show.config";
+           source: "photo_bt";
+           action: STATE_SET "config_bt_mouse_in" 0.0;
+           target: "app_window";
            transition: LINEAR 0.1;
         }
 
         program { 
-           name: "config_bt_mouse_out";
-           signal: "mouse,out";
-           source: "config_bt";
-           action: STATE_SET "default" 0.0;
-           target: "config_bt";
-           transition: LINEAR 0.1;
-        } 
+           name: "config_bt_mouse_clicked";
+           signal: "mouse,clicked,*";
+           source: "photo_bt";
+           action: SIGNAL_EMIT "main.selected.config" "config";
+        }
 
+        program { 
+           name: "main_selected_config";
+           signal: "main.selected.config";
+           source: "config_bt";
+           action: STATE_SET "config_bt_clicked" 0.0;
+           target: "app_window";
+           transition: LINEAR 0.1;
+        }/******** end config_bt ********/
+
+        
+        }/******** exit_bt ********/
         program { 
            name: "exit_bt_mouse_in";
            signal: "mouse,in";
            source: "exit_bt";
-           action: STATE_SET "mouse_in" 0.0;
-           target: "exit_bt";
+           action: SIGNAL_EMIT "main.show.exit" "exit_bt";
+        }
+
+        program { 
+           name: "main_show_exit";
+           signal: "main.show.exit";
+           source: "exit_bt";
+           action: STATE_SET "exit_bt_mouse_in" 0.0;
+           target: "app_window";
            transition: LINEAR 0.1;
         }
 
         program { 
-           name: "exit_bt_mouse_out";
-           signal: "mouse,out";
+           name: "exit_bt_mouse_clicked";
+           signal: "mouse,clicked,*";
            source: "exit_bt";
-           action: STATE_SET "default" 0.0;
-           target: "exit_bt";
-           transition: LINEAR 0.1;
+           action: SIGNAL_EMIT "main.selected.exit" "exit_bt";
         }
-        
+
         program { // this program active the visibility of confirm exit window
-           name: "exit_bt_clicked";
-           signal: "mouse,clicked,1";
+           
+           name: "main_selected_exit";
+           signal: "main.selected.exit";
            source: "exit_bt";
            action: STATE_SET "visible" 0.0;
            target: "confirm_exit_window";
@@ -527,7 +593,7 @@ collections {
 
         program { // this program just works if the confirm exit window is visible
            name: "yes_bt_clicked";
-           signal: "mouse,clicked,1";
+           signal: "mouse,clicked,*";
            source: "yes_bt";
            action: SIGNAL_EMIT "yes_bt,clicked" "yes_bt";
            //target: "exit_bt";
@@ -555,8 +621,9 @@ collections {
            target: "yes_bt";
            target: "no_bt";
            transition: LINEAR 0.1;
-        }
         
+        }/******** end exit_bt ********/
+      
      } /* end programs */
  } /*end group "my_group" */
 } /* end collections */
