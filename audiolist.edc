@@ -130,6 +130,13 @@ collections {
          target: "backbt";
       }
       program {
+         name: "backbt_mouse_out";
+         signal: "mouse,out";
+         source: "backbt";
+         action: STATE_SET "default" 0.0;
+         target: "backbt";
+      }
+      program {
          name: "backbt_mouse_clicked";
          signal: "mouse,clicked,*";
          source: "backbt";
